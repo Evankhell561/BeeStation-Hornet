@@ -601,3 +601,31 @@
 
 	beakers += B1
 	beakers += B2
+
+/obj/item/grenade/chem_grenade/water
+	name = "water grenade"
+	stage = GRENADE_READY
+
+/obj/item/grenade/chem_grenade/water/Initialize()
+	. = ..()
+	var/obj/item/reagent_containers/glass/beaker/bluespace/B1 = new(src)
+	var/obj/item/reagent_containers/glass/beaker/bluespace/B2 = new(src)
+	B1.reagents.add_reagent(/datum/reagent/water, 50)
+	B2.reagents.add_reagent(/datum/reagent/water, 50)
+	beakers += B1
+	beakers += B2
+
+/obj/item/grenade/chem_grenade/slimejelly
+	name = "slime jelly grenade"
+	stage = GRENADE_READY
+
+/obj/item/grenade/chem_grenade/slimejelly/Initialize()
+	. = ..()
+	var/obj/item/reagent_containers/glass/beaker/bluespace/B1 = new(src)
+	var/obj/item/reagent_containers/glass/beaker/bluespace/B2 = new(src)
+	B1.reagents.add_reagent(/datum/reagent/toxin/slimejelly, 25)
+	B1.reagents.add_reagent(/datum/reagent/potassium, 10)
+	B2.reagents.add_reagent(/datum/reagent/phosphorus, 10)
+	B2.reagents.add_reagent(/datum/reagent/consumable/sugar, 10)
+	beakers += B1
+	beakers += B2

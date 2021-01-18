@@ -122,6 +122,14 @@
 		. = 1
 	..()
 
+/datum/reagent/toxin/slime_acid
+	name = "Slime Jelly"
+	description = "One of several gooey semi-liquids produced from one of the deadliest lifeforms in existence."
+	color = "#801E28" // rgb: 128, 30, 40
+	toxpwr = 0
+	taste_description = "slime"
+	taste_mult = 1.3
+
 /datum/reagent/toxin/minttoxin
 	name = "Mint Toxin"
 	description = "Useful for dealing with undesirable customers."

@@ -153,8 +153,9 @@
 	icon_state = "Goliath_tentacle_spawn"
 	layer = BELOW_MOB_LAYER
 	var/mob/living/spawner
+	var/attack_all = FALSE
 
-/obj/effect/temp_visual/goliath_tentacle/Initialize(mapload, mob/living/new_spawner)
+/obj/effect/temp_visual/goliath_tentacle/Initialize(mapload, mob/living/new_spawner, n_attack_all)
 	. = ..()
 	for(var/obj/effect/temp_visual/goliath_tentacle/T in loc)
 		if(T != src)
@@ -164,6 +165,8 @@
 	if(ismineralturf(loc))
 		var/turf/closed/mineral/M = loc
 		M.gets_drilled()
+	if(n_attack_all)
+		attack_all = TRUE
 	deltimer(timerid)
 	timerid = addtimer(CALLBACK(src, .proc/tripanim), 7, TIMER_STOPPABLE)
 
@@ -176,15 +179,15 @@
 		if(T)
 			new /obj/effect/temp_visual/goliath_tentacle(T, spawner)
 
-/obj/effect/temp_visual/goliath_tentacle/proc/tripanim()
+/obj/effect/temp_visual/goliath_tentacle/proc/tripanim(n_time = 3)
 	icon_state = "Goliath_tentacle_wiggle"
 	deltimer(timerid)
-	timerid = addtimer(CALLBACK(src, .proc/trip), 3, TIMER_STOPPABLE)
+	timerid = addtimer(CALLBACK(src, .proc/trip), n_time, TIMER_STOPPABLE)
 
 /obj/effect/temp_visual/goliath_tentacle/proc/trip()
 	var/latched = FALSE
 	for(var/mob/living/L in loc)
-		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.stat == DEAD)
+		if((!QDELETED(spawner) && (spawner.faction_check_mob(L) && !attack_all)) || L.stat == DEAD)
 			continue
 		visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")
 		L.Stun(100)

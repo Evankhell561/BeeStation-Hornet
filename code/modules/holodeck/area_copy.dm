@@ -1,7 +1,8 @@
 //Vars that will not be copied when using /DuplicateObject
 GLOBAL_LIST_INIT(duplicate_forbidden_vars,list(
 	"tag", "datum_components", "area", "type", "loc", "locs", "vars", "parent", "parent_type", "verbs", "ckey", "key",
-	"power_supply", "contents", "reagents", "stat", "x", "y", "z", "group", "atmos_adjacent_turfs", "comp_lookup"
+	"power_supply", "contents", "reagents", "stat", "x", "y", "z", "group", "atmos_adjacent_turfs", "comp_lookup", "internal_organs",
+	"bodyparts", "internal_organs_slot",
 	))
 
 /proc/DuplicateObject(atom/original, perfectcopy = TRUE, sameloc, atom/newloc = null, nerf, holoitem)
@@ -15,7 +16,7 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars,list(
 	else
 		O = new original.type(newloc)
 
-	if(perfectcopy && O && original)
+	if(perfectcopy && O)
 		for(var/V in original.vars - GLOB.duplicate_forbidden_vars)
 			if(islist(original.vars[V]))
 				var/list/L = original.vars[V]
@@ -41,6 +42,12 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars,list(
 			if(istype(O, /obj/machinery/button))
 				var/obj/machinery/button/B = O
 				B.setup_device()
+
+	if(isliving(O) && nerf)
+		var/mob/living/L = O
+		L.maxHealth = max(round(L.maxHealth / 5), 1)
+		L.health = L.maxHealth
+		L.updatehealth()
 
 	if(holoitem)
 		O.flags_1 |= HOLOGRAM_1

@@ -721,7 +721,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 			var/mob/living/L = hit_atom
 			L.IgniteMob()
 		var/itempush = 1
-		if(w_class < 4)
+		if(w_class < WEIGHT_CLASS_BULKY)
 			itempush = 0 //too light to push anything
 		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum)
 

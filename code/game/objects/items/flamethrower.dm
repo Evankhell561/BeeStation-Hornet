@@ -18,9 +18,9 @@
 	var/status = FALSE
 	var/lit = FALSE	//on or off
 	var/operating = FALSE//cooldown
-	var/obj/item/weldingtool/weldtool = null
-	var/obj/item/assembly/igniter/igniter = null
-	var/obj/item/tank/internals/plasma/ptank = null
+	var/obj/item/weldingtool/weldtool
+	var/obj/item/assembly/igniter/igniter
+	var/obj/item/tank/internals/plasma/ptank
 	var/warned_admins = FALSE //for the message_admins() when lit
 	//variables for prebuilt flamethrowers
 	var/create_full = FALSE

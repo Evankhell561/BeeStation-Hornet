@@ -6,8 +6,8 @@
 	pressure_resistance = 10
 
 	var/resize = 1 //Badminnery resize
-	var/lastattacker = null
-	var/lastattackerckey = null
+	var/lastattacker
+	var/lastattackerckey
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.

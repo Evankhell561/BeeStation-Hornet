@@ -313,8 +313,9 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 		qdel(src)
 	return TRUE
 
-/obj/item/shard/Crossed(mob/living/L)
-	if(istype(L) && has_gravity(loc))
+/obj/item/shard/Crossed(atom/movable/AM, oldloc)
+	if(isliving(AM) && has_gravity(loc))
+		var/mob/living/L = AM
 		if(HAS_TRAIT(L, TRAIT_LIGHT_STEP))
 			playsound(loc, 'sound/effects/glass_step.ogg', 30, 1)
 		else
@@ -329,3 +330,14 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	icon_state = "plasmalarge"
 	materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
 	icon_prefix = "plasma"
+
+/obj/item/shard/adamantine
+	name = "purple shard"
+	desc = "A nasty looking shard of adamantine glass."
+	force = 7
+	throwforce = 12
+	icon_state = "adamantinelarge"
+	materials = list(/obj/item/stack/sheet/mineral/adamantine=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
+	color =  "#009797"// or 008080
+
+/obj/item/shard/adamantine/
